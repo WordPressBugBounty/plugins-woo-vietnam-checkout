@@ -1,1 +1,152 @@
-!function(t){t(document).ready(function(){var e={formatNoMatches:woocommerce_district_admin.formatNoMatches},n=loading_shipping=!1;t("#_billing_state").select2(e),t("#_billing_city").select2(e),t("#_billing_address_2").select2(e),t("body").on("select2:select select2-selecting","#_billing_state",function(i){t("#_billing_city option").val("");i=i.val;(i=i||t("#_billing_state option:selected").val())&&!n&&(n=!0,t.ajax({type:"post",dataType:"json",url:woocommerce_district_admin.ajaxurl,data:{action:"load_diagioihanhchinh",matp:i},context:this,beforeSend:function(){t("#_billing_city,#_billing_address_2").html("").select2();var i=new Option("Loading...","");t("#_billing_city, #_billing_address_2").append(i)},success:function(i){n=!1,t("#_billing_city,#_billing_address_2").html("").select2();var e=new Option("Chọn xã/phường/thị trấn","");t("#_billing_address_2").append(e),i.success&&(i=i.data,e=new Option("Chọn quận/huyện",""),t("#_billing_city").append(e),t.each(i,function(i,n){e=new Option(n.name,n.maqh),t("#_billing_city").append(e)}))}}))}),0<t("#_billing_address_2").length&&t("body").on("change select2:select select2-selecting","#_billing_city",function(i){i=i.val;(i=i||t("#_billing_city option:selected").val())&&t.ajax({type:"post",dataType:"json",url:woocommerce_district_admin.ajaxurl,data:{action:"load_diagioihanhchinh",maqh:i},context:this,beforeSend:function(){t("#_billing_address_2").html("").select2();var i=new Option("Loading...","");t("#_billing_address_2").append(i)},success:function(i){var n;t("#_billing_address_2").html("").select2(e),i.success&&(n=i.data,i=new Option("Chọn xã/phường/thị trấn",""),t("#_billing_address_2").append(i),t.each(n,function(i,n){n=new Option(n.name,n.xaid);t("#_billing_address_2").append(n)}))}})}),t("#_shipping_state").select2(e),t("#_shipping_city").select2(e),t("#_shipping_address_2").select2(e),t("body").on("select2:select select2-selecting","#_shipping_state",function(i){t("#_shipping_city option").val("");i=i.val;(i=i||t("#_shipping_state option:selected").val())&&!loading_shipping&&(loading_shipping=!0,t.ajax({type:"post",dataType:"json",url:woocommerce_district_admin.ajaxurl,data:{action:"load_diagioihanhchinh",matp:i},context:this,beforeSend:function(){t("#_shipping_city,#_shipping_address_2").html("").select2();var i=new Option("Loading...","");t("#_shipping_city, #_shipping_address_2").append(i)},success:function(i){loading_shipping=!1,t("#_shipping_city,#_shipping_address_2").html("").select2();var n=new Option("Chọn xã/phường/thị trấn","");t("#_shipping_address_2").append(n),i.success&&(i=i.data,n=new Option("Chọn quận/huyện",""),t("#_shipping_city").append(n),t.each(i,function(i,n){n=new Option(n.name,n.maqh);t("#_shipping_city").append(n)}))}}))}),0<t("#_shipping_address_2").length&&t("body").on("change select2:select select2-selecting","#_shipping_city",function(i){i=i.val;(i=i||t("#_shipping_city option:selected").val())&&t.ajax({type:"post",dataType:"json",url:woocommerce_district_admin.ajaxurl,data:{action:"load_diagioihanhchinh",maqh:i},context:this,beforeSend:function(){t("#_shipping_address_2").html("").select2();var i=new Option("Loading...","");t("#_shipping_address_2").append(i)},success:function(i){var n;t("#_shipping_address_2").html("").select2(e),i.success&&(n=i.data,i=new Option("Chọn xã/phường/thị trấn",""),t("#_shipping_address_2").append(i),t.each(n,function(i,n){n=new Option(n.name,n.xaid);t("#_shipping_address_2").append(n)}))}})})})}(jQuery);
+(function($){
+    $(document).ready(function(){
+        var $defaultSetting = {
+            formatNoMatches: woocommerce_district_admin.formatNoMatches,
+        };
+        var loading_billing = loading_shipping = false;
+        //billing
+        $('#_billing_state').select2($defaultSetting);
+        $('#_billing_city').select2($defaultSetting);
+        $('#_billing_address_2').select2($defaultSetting);
+
+        $('body').on('select2:select select2-selecting', '#_billing_state',function(e){
+            $( "#_billing_city option" ).val('');
+            var matp = e.val;
+            if(!matp) matp = $( "#_billing_state option:selected" ).val();
+            if(matp && !loading_billing){
+                loading_billing = true;
+                $.ajax({
+                    type : "post",
+                    dataType : "json",
+                    url : woocommerce_district_admin.ajaxurl,
+                    data : {action: "load_diagioihanhchinh", matp : matp},
+                    context: this,
+                    beforeSend: function(){
+                        $("#_billing_city,#_billing_address_2").html('').select2();
+                        var newState = new Option('Loading...', '');
+                        $("#_billing_city, #_billing_address_2").append(newState);
+                    },
+                    success: function(response) {
+                        loading_billing = false;
+                        $("#_billing_city,#_billing_address_2").html('').select2();
+                        var newState = new Option('Chọn xã/phường/thị trấn', '');
+                        $("#_billing_address_2").append(newState);
+                        if(response.success) {
+                            var listQH = response.data;
+                            newState = new Option('Chọn quận/huyện', '');
+                            $("#_billing_city").append(newState);
+                            $.each(listQH,function(index,value){
+                                newState = new Option(value.name, value.maqh);
+                                $("#_billing_city").append(newState);
+                            });
+                        }
+                    }
+                });
+            }
+        });
+        if($('#_billing_address_2').length > 0){
+            $('body').on('change select2:select select2-selecting', '#_billing_city', function(e){
+                var maqh = e.val;
+                if(!maqh) maqh = $( "#_billing_city option:selected" ).val();
+                if(maqh) {
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: woocommerce_district_admin.ajaxurl,
+                        data: {action: "load_diagioihanhchinh", maqh: maqh},
+                        context: this,
+                        beforeSend: function(){
+                            $("#_billing_address_2").html('').select2();
+                            var newState = new Option('Loading...', '');
+                            $("#_billing_address_2").append(newState);
+                        },
+                        success: function (response) {
+                            $("#_billing_address_2").html('').select2($defaultSetting);
+                            if (response.success) {
+                                var listQH = response.data;
+                                var newState = new Option('Chọn xã/phường/thị trấn', '');
+                                $("#_billing_address_2").append(newState);
+                                $.each(listQH, function (index, value) {
+                                    var newState = new Option(value.name, value.xaid);
+                                    $("#_billing_address_2").append(newState);
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        //shipping
+        $('#_shipping_state').select2($defaultSetting);
+        $('#_shipping_city').select2($defaultSetting);
+        $('#_shipping_address_2').select2($defaultSetting);
+
+        $('body').on('select2:select select2-selecting', '#_shipping_state', function(e){
+            $( "#_shipping_city option" ).val('');
+            var matp = e.val;
+            if(!matp) matp = $( "#_shipping_state option:selected" ).val();
+            if(matp && !loading_shipping){
+                loading_shipping = true;
+                $.ajax({
+                    type : "post",
+                    dataType : "json",
+                    url : woocommerce_district_admin.ajaxurl,
+                    data : {action: "load_diagioihanhchinh", matp : matp},
+                    context: this,
+                    beforeSend: function(){
+                        $("#_shipping_city,#_shipping_address_2").html('').select2();
+                        var newState = new Option('Loading...', '');
+                        $("#_shipping_city, #_shipping_address_2").append(newState);
+                    },
+                    success: function(response) {
+                        loading_shipping = false;
+                        $("#_shipping_city,#_shipping_address_2").html('').select2();
+                        var newState = new Option('Chọn xã/phường/thị trấn', '');
+                        $("#_shipping_address_2").append(newState);
+                        if(response.success) {
+                            var listQH = response.data;
+                            var newState = new Option('Chọn quận/huyện', '');
+                            $("#_shipping_city").append(newState);
+                            $.each(listQH,function(index,value){
+                                var newState = new Option(value.name, value.maqh);
+                                $("#_shipping_city").append(newState);
+                            });
+                        }
+                    }
+                });
+            }
+        });
+        if($('#_shipping_address_2').length > 0){
+            $('body').on('change select2:select select2-selecting', '#_shipping_city', function(e){
+                var maqh = e.val;
+                if(!maqh) maqh = $( "#_shipping_city option:selected" ).val();
+                if(maqh) {
+                    $.ajax({
+                        type: "post",
+                        dataType: "json",
+                        url: woocommerce_district_admin.ajaxurl,
+                        data: {action: "load_diagioihanhchinh", maqh: maqh},
+                        context: this,
+                        beforeSend: function(){
+                            $("#_shipping_address_2").html('').select2();
+                            var newState = new Option('Loading...', '');
+                            $("#_shipping_address_2").append(newState);
+                        },
+                        success: function (response) {
+                            $("#_shipping_address_2").html('').select2($defaultSetting);
+                            if (response.success) {
+                                var listQH = response.data;
+                                var newState = new Option('Chọn xã/phường/thị trấn', '');
+                                $("#_shipping_address_2").append(newState);
+                                $.each(listQH, function (index, value) {
+                                    var newState = new Option(value.name, value.xaid);
+                                    $("#_shipping_address_2").append(newState);
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        }
+    });
+})(jQuery);

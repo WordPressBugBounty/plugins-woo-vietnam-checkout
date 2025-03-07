@@ -3,8 +3,8 @@ Contributors: levantoan
 Donate link: https://levantoan.com/donate/
 Tags: woocommerce, woo viet, woocommerce vietnam checkout, quan huyen, vietnam checkout
 Requires at least: 4.3
-Tested up to: 6.4.2
-Stable tag: 2.1.1
+Tested up to: 6.7.2
+Stable tag: 2.1.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -87,6 +87,10 @@ Hãy xem code ở đây [để bỏ trường email đi](https://levantoan.com/l
 
 Thông tin thêm [về plugin này](https://levantoan.com/lua-chon-tinhthanh-pho-vao-form-checkout-cua-woocommerce/).
 Xem thêm bản PRO [tại đây](https://levantoan.com/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce/).
+
+= 2.1.2 =
+
+* Cập nhật đơn vị hành chính mới nhất 03.2025
 
 = 2.1.1 =
 
