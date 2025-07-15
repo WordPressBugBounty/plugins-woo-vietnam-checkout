@@ -7,7 +7,6 @@
         //billing
         $('#_billing_state').select2($defaultSetting);
         $('#_billing_city').select2($defaultSetting);
-        $('#_billing_address_2').select2($defaultSetting);
 
         $('body').on('select2:select select2-selecting', '#_billing_state',function(e){
             $( "#_billing_city option" ).val('');
@@ -22,15 +21,14 @@
                     data : {action: "load_diagioihanhchinh", matp : matp},
                     context: this,
                     beforeSend: function(){
-                        $("#_billing_city,#_billing_address_2").html('').select2();
+                        $("#_billing_city").html('').select2();
                         var newState = new Option('Loading...', '');
-                        $("#_billing_city, #_billing_address_2").append(newState);
+                        $("#_billing_city").append(newState);
                     },
                     success: function(response) {
                         loading_billing = false;
-                        $("#_billing_city,#_billing_address_2").html('').select2();
+                        $("#_billing_city").html('').select2();
                         var newState = new Option('Chọn xã/phường/thị trấn', '');
-                        $("#_billing_address_2").append(newState);
                         if(response.success) {
                             var listQH = response.data;
                             newState = new Option('Chọn quận/huyện', '');
@@ -44,42 +42,9 @@
                 });
             }
         });
-        if($('#_billing_address_2').length > 0){
-            $('body').on('change select2:select select2-selecting', '#_billing_city', function(e){
-                var maqh = e.val;
-                if(!maqh) maqh = $( "#_billing_city option:selected" ).val();
-                if(maqh) {
-                    $.ajax({
-                        type: "post",
-                        dataType: "json",
-                        url: woocommerce_district_admin.ajaxurl,
-                        data: {action: "load_diagioihanhchinh", maqh: maqh},
-                        context: this,
-                        beforeSend: function(){
-                            $("#_billing_address_2").html('').select2();
-                            var newState = new Option('Loading...', '');
-                            $("#_billing_address_2").append(newState);
-                        },
-                        success: function (response) {
-                            $("#_billing_address_2").html('').select2($defaultSetting);
-                            if (response.success) {
-                                var listQH = response.data;
-                                var newState = new Option('Chọn xã/phường/thị trấn', '');
-                                $("#_billing_address_2").append(newState);
-                                $.each(listQH, function (index, value) {
-                                    var newState = new Option(value.name, value.xaid);
-                                    $("#_billing_address_2").append(newState);
-                                });
-                            }
-                        }
-                    });
-                }
-            });
-        }
         //shipping
         $('#_shipping_state').select2($defaultSetting);
         $('#_shipping_city').select2($defaultSetting);
-        $('#_shipping_address_2').select2($defaultSetting);
 
         $('body').on('select2:select select2-selecting', '#_shipping_state', function(e){
             $( "#_shipping_city option" ).val('');
@@ -94,15 +59,14 @@
                     data : {action: "load_diagioihanhchinh", matp : matp},
                     context: this,
                     beforeSend: function(){
-                        $("#_shipping_city,#_shipping_address_2").html('').select2();
+                        $("#_shipping_city").html('').select2();
                         var newState = new Option('Loading...', '');
-                        $("#_shipping_city, #_shipping_address_2").append(newState);
+                        $("#_shipping_city").append(newState);
                     },
                     success: function(response) {
                         loading_shipping = false;
-                        $("#_shipping_city,#_shipping_address_2").html('').select2();
+                        $("#_shipping_city").html('').select2();
                         var newState = new Option('Chọn xã/phường/thị trấn', '');
-                        $("#_shipping_address_2").append(newState);
                         if(response.success) {
                             var listQH = response.data;
                             var newState = new Option('Chọn quận/huyện', '');
@@ -116,37 +80,5 @@
                 });
             }
         });
-        if($('#_shipping_address_2').length > 0){
-            $('body').on('change select2:select select2-selecting', '#_shipping_city', function(e){
-                var maqh = e.val;
-                if(!maqh) maqh = $( "#_shipping_city option:selected" ).val();
-                if(maqh) {
-                    $.ajax({
-                        type: "post",
-                        dataType: "json",
-                        url: woocommerce_district_admin.ajaxurl,
-                        data: {action: "load_diagioihanhchinh", maqh: maqh},
-                        context: this,
-                        beforeSend: function(){
-                            $("#_shipping_address_2").html('').select2();
-                            var newState = new Option('Loading...', '');
-                            $("#_shipping_address_2").append(newState);
-                        },
-                        success: function (response) {
-                            $("#_shipping_address_2").html('').select2($defaultSetting);
-                            if (response.success) {
-                                var listQH = response.data;
-                                var newState = new Option('Chọn xã/phường/thị trấn', '');
-                                $("#_shipping_address_2").append(newState);
-                                $.each(listQH, function (index, value) {
-                                    var newState = new Option(value.name, value.xaid);
-                                    $("#_shipping_address_2").append(newState);
-                                });
-                            }
-                        }
-                    });
-                }
-            });
-        }
     });
 })(jQuery);

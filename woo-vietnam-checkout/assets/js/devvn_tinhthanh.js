@@ -10,13 +10,10 @@
         };
         var loading_billing = loading_shipping = false;
         var billing_city_field = $('#billing_city_field');
-        var billing_address_2_field = $('#billing_address_2_field');
         var shipping_city_field = $('#shipping_city_field');
-        var shipping_address_2_field = $('#shipping_address_2_field');
         //billing
         $('#billing_state').select2($defaultSetting);
         $('#billing_city').select2($defaultSetting);
-        $('#billing_address_2').select2($defaultSetting);
 
         $('body #billing_state').on('select2:select select2-selecting',function(e){
             $( "#billing_city option" ).val('');
@@ -32,11 +29,10 @@
                     context: this,
                     beforeSend: function(){
                         billing_city_field.addClass('devvn_loading');
-                        billing_address_2_field.addClass('devvn_loading');
                     },
                     success: function(response) {
                         loading_billing = false;
-                        $("#billing_city,#billing_address_2").html('').select2();
+                        $("#billing_city").html('').select2();
                         if(response.success) {
                             var listQH = response.data;
                             var newState = new Option('', '');
@@ -47,46 +43,13 @@
                             });
                         }
                         billing_city_field.removeClass('devvn_loading');
-                        billing_address_2_field.removeClass('devvn_loading');
                     }
                 });
             }
         });
-        if($('#billing_address_2').length > 0){
-            $('#billing_city').on('select2:select select2-selecting',function(e){
-                var maqh = e.val;
-                if(!maqh) maqh = $( "#billing_city option:selected" ).val();
-                if(maqh) {
-                    $.ajax({
-                        type: "post",
-                        dataType: "json",
-                        url: vncheckout_array.get_address,
-                        data: {action: "load_diagioihanhchinh", maqh: maqh},
-                        context: this,
-                        beforeSend: function(){
-                            billing_address_2_field.addClass('devvn_loading');
-                        },
-                        success: function (response) {
-                            $("#billing_address_2").html('').select2($defaultSetting);
-                            if (response.success) {
-                                var listQH = response.data;
-                                var newState = new Option('', '');
-                                $("#billing_address_2").append(newState);
-                                $.each(listQH, function (index, value) {
-                                    var newState = new Option(value.name, value.xaid);
-                                    $("#billing_address_2").append(newState);
-                                });
-                            }
-                            billing_address_2_field.removeClass('devvn_loading');
-                        }
-                    });
-                }
-            });
-        }
         //shipping
         $('#shipping_state').select2($defaultSetting);
         $('#shipping_city').select2($defaultSetting);
-        $('#shipping_address_2').select2($defaultSetting);
 
         $('body #shipping_state').on('select2:select select2-selecting',function(e){
             $( "#shipping_city option" ).val('');
@@ -102,11 +65,10 @@
                     context: this,
                     beforeSend: function(){
                         shipping_city_field.addClass('devvn_loading');
-                        shipping_address_2_field.addClass('devvn_loading');
                     },
                     success: function(response) {
                         loading_shipping = false;
-                        $("#shipping_city,#shipping_address_2").html('').select2();
+                        $("#shipping_city").html('').select2();
                         if(response.success) {
                             var listQH = response.data;
                             var newState = new Option('', '');
@@ -117,42 +79,10 @@
                             });
                         }
                         shipping_city_field.removeClass('devvn_loading');
-                        shipping_address_2_field.removeClass('devvn_loading');
                     }
                 });
             }
         });
-        if($('#shipping_address_2').length > 0){
-            $('#shipping_city').on('select2:select select2-selecting',function(e){
-                var maqh = e.val;
-                if(!maqh) maqh = $( "#shipping_city option:selected" ).val();
-                if(maqh) {
-                    $.ajax({
-                        type: "post",
-                        dataType: "json",
-                        url: vncheckout_array.get_address,
-                        data: {action: "load_diagioihanhchinh", maqh: maqh},
-                        context: this,
-                        beforeSend: function(){
-                            shipping_address_2_field.addClass('devvn_loading');
-                        },
-                        success: function (response) {
-                            $("#shipping_address_2").html('').select2($defaultSetting);
-                            if (response.success) {
-                                var listQH = response.data;
-                                var newState = new Option('', '');
-                                $("#shipping_address_2").append(newState);
-                                $.each(listQH, function (index, value) {
-                                    var newState = new Option(value.name, value.xaid);
-                                    $("#shipping_address_2").append(newState);
-                                });
-                            }
-                            shipping_address_2_field.removeClass('devvn_loading');
-                        }
-                    });
-                }
-            });
-        }
         if($('#calc_shipping_city_field').length > 0){
             $( document.body ).bind( 'country_to_state_changed updated_wc_div country_to_state_changing', function() {
                 var district_field = $('#calc_shipping_city_field #calc_shipping_city');
@@ -248,7 +178,7 @@
                     success: function (response) {
                         //console.log(response);
                         if (response.success) {
-                            $("#billing_city,#billing_address_2").html('').select2();
+                            $("#billing_city").html('').select2();
                             if(response.data.billing.billing_state){
 
                                 $("#billing_state").val(response.data.billing.billing_state).select2().trigger('change');
@@ -263,16 +193,6 @@
                                         $("#billing_city").append(newState);
                                     });
 
-                                    if(response.data.billing.billing_city && $('#billing_address_2').length > 0){
-                                        $('#billing_address_2').val(response.data.billing.billing_address_2);
-                                        var listQH = response.data.ward;
-                                        var newState = new Option('', '');
-                                        $("#billing_address_2").append(newState);
-                                        $.each(listQH,function(index,value){
-                                            var newState = new Option(value.name, value.xaid);
-                                            $("#billing_address_2").append(newState);
-                                        });
-                                    }
                                 }
 
                             }
@@ -285,7 +205,6 @@
                                 }
                             });
                             mess.html('');
-                            $('#billing_address_2').trigger('change');
                             $.magnificPopup.close();
                         }else{
                             mess.html(vncheckout_array.loadaddress_error);

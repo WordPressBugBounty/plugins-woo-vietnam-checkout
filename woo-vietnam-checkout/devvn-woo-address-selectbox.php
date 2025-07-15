@@ -2,14 +2,14 @@
 /*
  * Plugin Name: Woocommerce Vietnam Checkout
  * Plugin URI: https://levantoan.com/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce/
- * Version: 2.1.2
+ * Version: 2.1.3
  * Description: Add province/city, district, commune/ward/town to checkout form and simplify checkout form
  * Author: Lê Văn Toản
  * Author URI: https://levantoan.com
  * Text Domain: woo-vietnam-checkout
  * Domain Path: /languages
  * WC requires at least: 8.0.0
- * WC tested up to: 9.7.1
+ * WC tested up to: 10.0.2
  * License: GPLv3
  * License URI: http://www.gnu.org/licenses/gpl-3.0
 Woocommerce Vietnam Checkout
@@ -50,7 +50,7 @@ if (
         {
             protected static $instance;
 
-            protected $_version = '2.1.2';
+            protected $_version = '2.1.3';
             public $_optionName = 'devvn_woo_district';
             public $_optionGroup = 'devvn-district-options-group';
             public $_defaultOptions = array(
@@ -268,34 +268,18 @@ if (
                     'priority' => 30
                 );
                 $fields['billing']['billing_city'] = array(
-                    'label' => __('District', 'woo-vietnam-checkout'),
+                    'label' => __('Ward/Commune', 'woo-vietnam-checkout'),
                     'required' => true,
                     'type' => 'select',
                     'class' => array('form-row-last'),
-                    'placeholder' => _x('Select District', 'placeholder', 'woo-vietnam-checkout'),
+                    'placeholder' => _x('Select Ward/Commune', 'placeholder', 'woo-vietnam-checkout'),
                     'options' => array(
                         '' => ''
                     ),
                     'priority' => 40
                 );
-                if (!$this->get_options()) {
-                    $fields['billing']['billing_address_2'] = array(
-                        'label' => __('Commune/Ward/Town', 'woo-vietnam-checkout'),
-                        'required' => true,
-                        'type' => 'select',
-                        'class' => array('form-row-first'),
-                        'placeholder' => _x('Select Commune/Ward/Town', 'placeholder', 'woo-vietnam-checkout'),
-                        'options' => array(
-                            '' => ''
-                        ),
-                        'priority' => 50
-                    );
-                    if ($this->get_options('required_village')) {
-                        $fields['billing']['billing_address_2']['required'] = false;
-                    }
-                }
                 $fields['billing']['billing_address_1']['placeholder'] = _x('Ex: No. 20, 90 Alley', 'placeholder', 'woo-vietnam-checkout');
-                $fields['billing']['billing_address_1']['class'] = array('form-row-last');
+                $fields['billing']['billing_address_1']['class'] = array('form-row-wide');
 
                 $fields['billing']['billing_address_1']['priority'] = 60;
                 if (isset($fields['billing']['billing_phone'])) {
@@ -312,6 +296,7 @@ if (
                 } else {
                     $fields['billing']['billing_country']['priority'] = 22;
                 }
+                unset($fields['billing']['billing_address_2']);
                 unset($fields['billing']['billing_company']);
 
                 //Shipping
@@ -346,34 +331,18 @@ if (
                     'priority' => 30
                 );
                 $fields['shipping']['shipping_city'] = array(
-                    'label' => __('District', 'woo-vietnam-checkout'),
+                    'label' => __('Ward/Commune', 'woo-vietnam-checkout'),
                     'required' => true,
                     'type' => 'select',
                     'class' => array('form-row-last'),
-                    'placeholder' => _x('Select District', 'placeholder', 'woo-vietnam-checkout'),
+                    'placeholder' => _x('Select Ward/Commune', 'placeholder', 'woo-vietnam-checkout'),
                     'options' => array(
                         '' => '',
                     ),
                     'priority' => 40
                 );
-                if (!$this->get_options()) {
-                    $fields['shipping']['shipping_address_2'] = array(
-                        'label' => __('Commune/Ward/Town', 'woo-vietnam-checkout'),
-                        'required' => true,
-                        'type' => 'select',
-                        'class' => array('form-row-first'),
-                        'placeholder' => _x('Select Commune/Ward/Town', 'placeholder', 'woo-vietnam-checkout'),
-                        'options' => array(
-                            '' => '',
-                        ),
-                        'priority' => 50
-                    );
-                    if ($this->get_options('required_village')) {
-                        $fields['shipping']['shipping_address_2']['required'] = false;
-                    }
-                }
                 $fields['shipping']['shipping_address_1']['placeholder'] = _x('Ex: No. 20, 90 Alley', 'placeholder', 'woo-vietnam-checkout');
-                $fields['shipping']['shipping_address_1']['class'] = array('form-row-last');
+                $fields['shipping']['shipping_address_1']['class'] = array('form-row-wide');
                 $fields['shipping']['shipping_address_1']['priority'] = 60;
                 if (!$this->get_options('enable_firstname')) {
                     unset($fields['shipping']['shipping_first_name']);
@@ -383,6 +352,7 @@ if (
                 } else {
                     $fields['shipping']['shipping_country']['priority'] = 22;
                 }
+                unset($fields['shipping']['shipping_address_2']);
                 unset($fields['shipping']['shipping_company']);
 
                 uasort($fields['billing'], array($this, 'sort_fields_by_order'));
@@ -509,13 +479,22 @@ if (
                     $id_tinh = wc_clean(wp_unslash($id));
                 }
                 $tinh_thanhpho_name = (isset($tinh_thanhpho[$id_tinh])) ? $tinh_thanhpho[$id_tinh] : '';
+                if(!$tinh_thanhpho_name){
+                    include 'cities/tinh_thanhpho_old2.php';
+                    $tinh_thanhpho_name = (isset($tinh_thanhpho[$id_tinh])) ? $tinh_thanhpho[$id_tinh] : '';
+                }
                 return $tinh_thanhpho_name;
             }
 
             function get_name_district($id = '')
             {
-                include 'cities/quan_huyen.php';
-                $id_quan = sprintf("%03d", intval($id));
+                if (strlen($id) === 3) {
+                    include 'cities/quan_huyen_old.php';
+                    $id_quan = sprintf("%03d", intval($id));
+                }else {
+                    include 'cities/quan_huyen.php';
+                    $id_quan = sprintf("%05d", intval($id));
+                }
                 if (is_array($quan_huyen) && !empty($quan_huyen)) {
                     $nameQuan = $this->search_in_array($quan_huyen, 'maqh', $id_quan);
                     $nameQuan = isset($nameQuan[0]['name']) ? $nameQuan[0]['name'] : '';
@@ -829,12 +808,10 @@ if (
                         'priority' => 44,
                     ),
                 );
-                if (!$this->get_options()) {
-                    $field_s['address_2'] = array(
-                        'hidden' => false,
-                        'priority' => 43,
-                    );
-                }
+                $field_s['address_2'] = array(
+                    'hidden' => true,
+                    'priority' => 43,
+                );
                 $args['VN'] = $field_s;
                 return $args;
             }
@@ -873,30 +850,17 @@ if (
                     unset($address_fields['postcode']);
                 }
                 $address_fields['city'] = array(
-                    'label' => __('District', 'woo-vietnam-checkout'),
+                    'label' => __('Ward/Commune', 'woo-vietnam-checkout'),
                     'type' => 'select',
                     'required' => true,
                     'class' => array('form-row-wide'),
                     'priority' => 20,
-                    'placeholder' => _x('Select District', 'placeholder', 'woo-vietnam-checkout'),
+                    'placeholder' => _x('Select Ward/Commune', 'placeholder', 'woo-vietnam-checkout'),
                     'options' => array(
                         '' => ''
                     ),
                 );
-                if (!$this->get_options()) {
-                    $address_fields['address_2'] = array(
-                        'label' => __('Commune/Ward/Town', 'woo-vietnam-checkout'),
-                        'type' => 'select',
-                        'class' => array('form-row-wide'),
-                        'priority' => 30,
-                        'placeholder' => _x('Select Commune/Ward/Town', 'placeholder', 'woo-vietnam-checkout'),
-                        'options' => array(
-                            '' => ''
-                        ),
-                    );
-                } else {
-                    unset($address_fields['address_2']);
-                }
+                unset($address_fields['address_2']);
                 $address_fields['address_1']['class'] = array('form-row-wide');
                 return $address_fields;
             }
@@ -944,11 +908,11 @@ if (
                         'show' => false,
                     ),
                     'city' => array(
-                        'label' => __('Quận/huyện', 'woocommerce'),
+                        'label' => __('Phường/Xã', 'woocommerce'),
                         'class' => 'js_field-city select short',
                         'type' => 'select',
                         'show' => false,
-                        'options' => array('' => __('Chọn quận/huyện&hellip;', 'woocommerce')) + $this->get_list_district_select($city),
+                        'options' => array('' => __('Chọn Phường/Xã&hellip;', 'woocommerce')) + $this->get_list_district_select($city),
                     ),
                     'address_2' => array(
                         'label' => __('Xã/phường/thị trấn', 'woocommerce'),
@@ -968,9 +932,7 @@ if (
                         'label' => __('Phone', 'woocommerce'),
                     )
                 );
-                if ($this->get_options()) {
-                    unset($billing_fields['address_2']);
-                }
+                unset($billing_fields['address_2']);
                 return $billing_fields;
             }
 
@@ -1017,33 +979,24 @@ if (
                         'show' => false,
                     ),
                     'city' => array(
-                        'label' => __('Quận/huyện', 'woocommerce'),
+                        'label' => __('Phường/Xã', 'woocommerce'),
                         'class' => 'js_field-city select short',
                         'type' => 'select',
                         'show' => false,
-                        'options' => array('' => __('Chọn quận/huyện&hellip;', 'woocommerce')) + $this->get_list_district_select($city),
-                    ),
-                    'address_2' => array(
-                        'label' => __('Xã/phường/thị trấn', 'woocommerce'),
-                        'show' => false,
-                        'class' => 'js_field-address_2 select short',
-                        'type' => 'select',
-                        'options' => array('' => __('Chọn xã/phường/thị trấn&hellip;', 'woocommerce')) + $this->get_list_village_select($district),
+                        'options' => array('' => __('Chọn Phường/Xã&hellip;', 'woocommerce')) + $this->get_list_district_select($city),
                     ),
                     'address_1' => array(
                         'label' => __('Address line 1', 'woocommerce'),
                         'show' => false,
                     ),
                 );
-                if ($this->get_options()) {
-                    unset($billing_fields['address_2']);
-                }
+                unset($billing_fields['address_2']);
                 return $billing_fields;
             }
 
             function devvn_woocommerce_form_field_select($field, $key, $args, $value)
             {
-                if (in_array($key, array('billing_city', 'shipping_city', 'billing_address_2', 'shipping_address_2'))) {
+                if (in_array($key, array('billing_city', 'shipping_city'))) {
                     if (in_array($key, array('billing_city', 'shipping_city'))) {
                         if (!is_checkout() && is_user_logged_in()) {
                             if ('billing_city' === $key) {
@@ -1056,18 +1009,6 @@ if (
                         }
                         $city = array('' => ($args['placeholder']) ? $args['placeholder'] : __('Choose an option', 'woocommerce')) + $this->get_list_district_select($state);
                         $args['options'] = $city;
-                    } elseif (in_array($key, array('billing_address_2', 'shipping_address_2'))) {
-                        if (!is_checkout() && is_user_logged_in()) {
-                            if ('billing_address_2' === $key) {
-                                $city = wc_get_post_data_by_key('billing_city', get_user_meta(get_current_user_id(), 'billing_city', true));
-                            } else {
-                                $city = wc_get_post_data_by_key('shipping_city', get_user_meta(get_current_user_id(), 'shipping_city', true));
-                            }
-                        } else {
-                            $city = WC()->checkout->get_value('billing_address_2' === $key ? 'billing_city' : 'shipping_city');
-                        }
-                        $village = array('' => ($args['placeholder']) ? $args['placeholder'] : __('Choose an option', 'woocommerce')) + $this->get_list_village_select($city);
-                        $args['options'] = $village;
                     }
 
                     if ($args['required']) {
