@@ -1,7 +1,7 @@
 <div class="wrap">
-	<h1>Woocommerce Vietnam Checkout</h1>
+	<h1>Vietnam Checkout for WooCommerce</h1>
 	<p>Plugin được viết và phát triển bởi <a href="https://levantoan.com" target="_blank" title="Đến web của Toản">Lê Văn Toản</a></p>
-    <p>Bản PRO cho phép bạn <strong>tính phí vận chuyển tới cấp quận/huyện; xã/phường/thị trấn</strong>. <a href="https://levantoan.com/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce/" target="_blank">Xem thêm ở đây</a></p>
+    <p>Bản PRO cho phép bạn <strong>tính phí vận chuyển tới cấp quận/huyện; xã/phường/thị trấn</strong>. <a href="https://levantoan.com/san-pham/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce-woo-vietnam-checkout/" target="_blank">Xem thêm ở đây</a></p>
     <div class="help_dwas">
         Video hướng dẫn cài đặt phí vận chuyển: <a href="https://www.youtube.com/watch?v=SQ4hQNE9TpM" rel="nofollow" target="_blank">Link Youtube</a><br>
     </div>

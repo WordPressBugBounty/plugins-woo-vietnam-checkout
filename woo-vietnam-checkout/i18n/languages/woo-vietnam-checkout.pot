@@ -1,7 +1,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Woocommerce Vietnam Checkout\n"
+"Project-Id-Version: Vietnam Checkout for WooCommerce\n"
 "POT-Creation-Date: 2024-01-07 22:20+0700\n"
 "PO-Revision-Date: 2024-01-07 22:20+0700\n"
 "Last-Translator: \n"
@@ -23,7 +23,7 @@ msgstr ""
 
 #. Plugin Name of the plugin/theme
 #: devvn-woo-address-selectbox.php:212
-msgid "Woocommerce Vietnam Checkout"
+msgid "Vietnam Checkout for WooCommerce"
 msgstr ""
 
 #: devvn-woo-address-selectbox.php:213

@@ -1,18 +1,18 @@
 <?php
 /*
- * Plugin Name: Woocommerce Vietnam Checkout
- * Plugin URI: https://levantoan.com/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce/
- * Version: 2.1.4
+ * Plugin Name: Vietnam Checkout for WooCommerce
+ * Plugin URI: https://levantoan.com/san-pham/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce-woo-vietnam-checkout/
+ * Version: 2.1.5
  * Description: Add province/city, district, commune/ward/town to checkout form and simplify checkout form
  * Author: Lê Văn Toản
  * Author URI: https://levantoan.com
  * Text Domain: woo-vietnam-checkout
  * Domain Path: /languages
  * WC requires at least: 8.0.0
- * WC tested up to: 10.0.4
+ * WC tested up to: 10.1.2
  * License: GPLv3
  * License URI: http://www.gnu.org/licenses/gpl-3.0
-Woocommerce Vietnam Checkout
+Vietnam Checkout for WooCommerce
 
 Copyright (C) 2017 Le Van Toan - www.levantoan.com
 
@@ -50,7 +50,7 @@ if (
         {
             protected static $instance;
 
-            protected $_version = '2.1.4';
+            protected $_version = '2.1.5';
             public $_optionName = 'devvn_woo_district';
             public $_optionGroup = 'devvn-district-options-group';
             public $_defaultOptions = array(
@@ -205,7 +205,7 @@ if (
             {
                 add_submenu_page(
                     'woocommerce',
-                    __('Woocommerce Vietnam Checkout', 'woo-vietnam-checkout'),
+                    __('Vietnam Checkout for WooCommerce', 'woo-vietnam-checkout'),
                     __('Woo VN Checkout', 'woo-vietnam-checkout'),
                     'manage_woocommerce',
                     'devvn-district-address',
@@ -388,7 +388,10 @@ if (
             }
 
             function check_file_open_status($file_url = ''){
-                if(!$file_url) return false;
+                if ( empty($file_url) || ! filter_var($file_url, FILTER_VALIDATE_URL) ) {
+                    return false;
+                }
+
                 $cache_key = '_check_get_address_file_status';
                 $status    = get_transient( $cache_key );
 
@@ -403,15 +406,20 @@ if (
                     )
                 );
 
+                if ( is_wp_error( $response ) ) {
+                    return false;
+                }
+
                 $response_code = intval( wp_remote_retrieve_response_code( $response ) );
 
-                if($response_code === 200) {
-                    set_transient( $cache_key, $response_code, 1 * DAY_IN_SECONDS );
+                if ( $response_code === 200 ) {
+                    set_transient( $cache_key, $response_code, WEEK_IN_SECONDS );
                     return $response_code;
                 }
 
                 return false;
             }
+
 
             function devvn_enqueue_UseAjaxInWp()
             {
@@ -774,7 +782,7 @@ if (
             public static function plugin_action_links($links)
             {
                 $action_links = array(
-                    'upgrade_pro' => '<a href="https://levantoan.com/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce/"  target="_blank" style="color: #e64a19; font-weight: bold; font-size: 108%%;" title="' . esc_attr( __( 'Upgrade to Pro', 'woo-vietnam-checkout' ) ) . '">' . __( 'Upgrade to Pro', 'woo-vietnam-checkout' ) . '</a>',
+                    'upgrade_pro' => '<a href="https://levantoan.com/san-pham/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce-woo-vietnam-checkout/"  target="_blank" style="color: #e64a19; font-weight: bold; font-size: 108%%;" title="' . esc_attr( __( 'Upgrade to Pro', 'woo-vietnam-checkout' ) ) . '">' . __( 'Upgrade to Pro', 'woo-vietnam-checkout' ) . '</a>',
                     'settings' => '<a href="' . admin_url('admin.php?page=devvn-district-address') . '" title="' . esc_attr(__('Settings', 'woo-vietnam-checkout')) . '">' . __('Settings', 'woo-vietnam-checkout') . '</a>',
                 );
 
@@ -1268,7 +1276,7 @@ if (
     if(!function_exists('vn_checkout_up_to_pro')) {
         function vn_checkout_up_to_pro()
         {
-            echo '<br><a href="https://levantoan.com/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce/" rel="nofollow" target="_blank" style=" text-decoration: none; color: red; font-size: 14px; "> <span class="dashicons dashicons-warning" style=" font-size: 17px; "></span> Chỉ có ở bản PRO</a>';
+            echo '<br><a href="https://levantoan.com/san-pham/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce-woo-vietnam-checkout/" rel="nofollow" target="_blank" style=" text-decoration: none; color: red; font-size: 14px; "> <span class="dashicons dashicons-warning" style=" font-size: 17px; "></span> Chỉ có ở bản PRO</a>';
         }
     }
 

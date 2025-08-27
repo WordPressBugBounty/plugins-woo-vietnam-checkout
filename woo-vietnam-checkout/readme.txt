@@ -1,14 +1,14 @@
-=== Woocommerce Vietnam Checkout ===
+=== Vietnam Checkout for WooCommerce ===
 Contributors: levantoan
 Donate link: https://levantoan.com/donate/
-Tags: woocommerce, woo viet, woocommerce vietnam checkout, quan huyen, vietnam checkout
+Tags: woocommerce, woo viet, Vietnam Checkout for WooCommerce, quan huyen, vietnam checkout
 Requires at least: 4.3
 Tested up to: 6.8.2
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-Woocommerce Vietnam Checkout - Thêm Tỉnh/Thành phố, Phường/Xã vào form checkout của Woo và tối giản form checkout cho phù hợp với Việt Nam
+Vietnam Checkout for WooCommerce - Thêm Tỉnh/Thành phố, Phường/Xã vào form checkout của Woo và tối giản form checkout cho phù hợp với Việt Nam
 
 == Description ==
 
@@ -52,7 +52,7 @@ https://www.youtube.com/watch?v=SQ4hQNE9TpM
 Các bước cài đặt thủ công:
 
 1. Trước tiên tải plugin này về và có thư mục tên `woo-vietnam-checkout`. Hãy tải nó lên `/wp-content/plugins/`.
-2. Sau đó vào `Quản lý plugins` và active plugin `Woocommerce Vietnam Checkout`.
+2. Sau đó vào `Quản lý plugins` và active plugin `Vietnam Checkout for WooCommerce`.
 3. Cơ bản đã xong. Bạn có thể vào `Settings / Vietnam Checkout` trong menu của admin để chọn thêm nhiều tùy chọn khác nhau.
 
 Để có được các tính năng tính phí vận chuyển tới quận/huyện bạn hãy tham khảo bản PRO - [Pro version](http://levantoan.com/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce/) Trong phiên bản Pro bạn có thể tính phí vận chuyển theo cân nặng hoặc tổng giá trị đơn hàng tới từng Quận/huyện.
@@ -86,7 +86,12 @@ Hãy xem code ở đây [để bỏ trường email đi](https://levantoan.com/l
 == Changelog ==
 
 Thông tin thêm [về plugin này](https://levantoan.com/lua-chon-tinhthanh-pho-vao-form-checkout-cua-woocommerce/).
-Xem thêm bản PRO [tại đây](https://levantoan.com/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce/).
+Xem thêm bản PRO [tại đây](https://levantoan.com/san-pham/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce-woo-vietnam-checkout/).
+
+= 2.1.5 =
+
+* Tối ưu hàm check_file_open_status()
+* Thay tên để phù hợp với quy định mới
 
 = 2.1.4 =
 
