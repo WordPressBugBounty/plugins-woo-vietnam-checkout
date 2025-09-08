@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Vietnam Checkout for WooCommerce\n"
-"POT-Creation-Date: 2025-07-16 02:42+0700\n"
+"POT-Creation-Date: 2025-09-08 07:50+0700\n"
 "PO-Revision-Date: 2024-01-07 22:20+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -30,11 +30,11 @@ msgstr ""
 msgid "Woo VN Checkout"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:245 devvn-woo-address-selectbox.php:842
+#: devvn-woo-address-selectbox.php:245 devvn-woo-address-selectbox.php:850
 msgid "Full name"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:246 devvn-woo-address-selectbox.php:843
+#: devvn-woo-address-selectbox.php:246 devvn-woo-address-selectbox.php:851
 msgctxt "placeholder"
 msgid "Type Full name"
 msgstr ""
@@ -48,7 +48,7 @@ msgid "Type your email"
 msgstr ""
 
 #: devvn-woo-address-selectbox.php:262 devvn-woo-address-selectbox.php:325
-#: devvn-woo-address-selectbox.php:801
+#: devvn-woo-address-selectbox.php:809
 msgid "Province/City"
 msgstr ""
 
@@ -62,12 +62,12 @@ msgid "Select Province/City"
 msgstr ""
 
 #: devvn-woo-address-selectbox.php:271 devvn-woo-address-selectbox.php:334
-#: devvn-woo-address-selectbox.php:853
+#: devvn-woo-address-selectbox.php:861
 msgid "Ward/Commune"
 msgstr ""
 
 #: devvn-woo-address-selectbox.php:275 devvn-woo-address-selectbox.php:338
-#: devvn-woo-address-selectbox.php:858
+#: devvn-woo-address-selectbox.php:866
 msgctxt "placeholder"
 msgid "Select Ward/Commune"
 msgstr ""
@@ -95,103 +95,103 @@ msgctxt "placeholder"
 msgid "Recipient phone"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:434 devvn-woo-address-selectbox.php:691
+#: devvn-woo-address-selectbox.php:442 devvn-woo-address-selectbox.php:699
 msgid "No value"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:435
+#: devvn-woo-address-selectbox.php:443
 msgid "Phone number is incorrect"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:436
+#: devvn-woo-address-selectbox.php:444
 msgid "Loading..."
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:437
+#: devvn-woo-address-selectbox.php:445
 msgid "Phone number does not exist"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:655
+#: devvn-woo-address-selectbox.php:663
 msgid "Phone number of the recipient"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:665
+#: devvn-woo-address-selectbox.php:673
 msgid "Shipping Phone:"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:684
+#: devvn-woo-address-selectbox.php:692
 msgid "Delete the selected boxes?"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:777
+#: devvn-woo-address-selectbox.php:785
 msgid "Upgrade to Pro"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:778
+#: devvn-woo-address-selectbox.php:786
 msgid "Settings"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:887 devvn-woo-address-selectbox.php:958
+#: devvn-woo-address-selectbox.php:895 devvn-woo-address-selectbox.php:966
 msgid "First name"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:891 devvn-woo-address-selectbox.php:962
+#: devvn-woo-address-selectbox.php:899 devvn-woo-address-selectbox.php:970
 msgid "Last name"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:895 devvn-woo-address-selectbox.php:966
+#: devvn-woo-address-selectbox.php:903 devvn-woo-address-selectbox.php:974
 msgid "Company"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:899 devvn-woo-address-selectbox.php:970
+#: devvn-woo-address-selectbox.php:907 devvn-woo-address-selectbox.php:978
 msgid "Country"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:903 devvn-woo-address-selectbox.php:974
+#: devvn-woo-address-selectbox.php:911 devvn-woo-address-selectbox.php:982
 msgid "Select a country&hellip;"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:906 devvn-woo-address-selectbox.php:977
+#: devvn-woo-address-selectbox.php:914 devvn-woo-address-selectbox.php:985
 msgid "Tỉnh/thành phố"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:911 devvn-woo-address-selectbox.php:982
+#: devvn-woo-address-selectbox.php:919 devvn-woo-address-selectbox.php:990
 msgid "Phường/Xã"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:915 devvn-woo-address-selectbox.php:986
+#: devvn-woo-address-selectbox.php:923 devvn-woo-address-selectbox.php:994
 msgid "Chọn Phường/Xã&hellip;"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:918
+#: devvn-woo-address-selectbox.php:926
 msgid "Xã/phường/thị trấn"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:922
+#: devvn-woo-address-selectbox.php:930
 msgid "Chọn xã/phường/thị trấn&hellip;"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:925 devvn-woo-address-selectbox.php:989
+#: devvn-woo-address-selectbox.php:933 devvn-woo-address-selectbox.php:997
 msgid "Address line 1"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:929
+#: devvn-woo-address-selectbox.php:937
 msgid "Email address"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:932
+#: devvn-woo-address-selectbox.php:940
 msgid "Phone"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:1010 devvn-woo-address-selectbox.php:1064
+#: devvn-woo-address-selectbox.php:1018 devvn-woo-address-selectbox.php:1072
 msgid "Choose an option"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:1016
+#: devvn-woo-address-selectbox.php:1024
 msgid "required"
 msgstr ""
 
-#: devvn-woo-address-selectbox.php:1209
+#: devvn-woo-address-selectbox.php:1217
 #, php-format
 msgid ""
 "<strong>Mua bản quyền để được tự động update. <a href=\"%s\" "
@@ -292,8 +292,8 @@ msgstr ""
 
 #. Plugin URI of the plugin/theme
 msgid ""
-"https://levantoan.com/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-"
-"woocommerce/"
+"https://levantoan.com/san-pham/plugin-tinh-phi-van-chuyen-cho-quan-huyen-"
+"trong-woocommerce-woo-vietnam-checkout/"
 msgstr ""
 
 #. Description of the plugin/theme

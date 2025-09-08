@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Vietnam Checkout for WooCommerce\n"
 "POT-Creation-Date: 2025-07-16 02:42+0700\n"
-"PO-Revision-Date: 2025-07-16 02:44+0700\n"
+"PO-Revision-Date: 2025-09-08 07:51+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: vi\n"
@@ -55,7 +55,7 @@ msgstr "Tỉnh/Thành phố"
 #: devvn-woo-address-selectbox.php:266 devvn-woo-address-selectbox.php:329
 msgctxt "placeholder"
 msgid "Select Province/City"
-msgstr "Chọn Quận/Huyện"
+msgstr "Chọn Tỉnh/Thành phố"
 
 #: devvn-woo-address-selectbox.php:267 devvn-woo-address-selectbox.php:330
 msgid "Select Province/City"
@@ -161,7 +161,7 @@ msgstr "Phường/Xã"
 
 #: devvn-woo-address-selectbox.php:915 devvn-woo-address-selectbox.php:986
 msgid "Chọn Phường/Xã&hellip;"
-msgstr "Chọn Phường/Xã"
+msgstr "Chọn Phường/Xã&hellip;"
 
 #: devvn-woo-address-selectbox.php:918
 msgid "Xã/phường/thị trấn"

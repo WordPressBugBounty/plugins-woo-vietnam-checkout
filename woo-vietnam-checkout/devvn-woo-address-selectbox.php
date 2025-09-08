@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Vietnam Checkout for WooCommerce
  * Plugin URI: https://levantoan.com/san-pham/plugin-tinh-phi-van-chuyen-cho-quan-huyen-trong-woocommerce-woo-vietnam-checkout/
- * Version: 2.1.5
+ * Version: 2.1.6
  * Description: Add province/city, district, commune/ward/town to checkout form and simplify checkout form
  * Author: Lê Văn Toản
  * Author URI: https://levantoan.com
@@ -50,7 +50,7 @@ if (
         {
             protected static $instance;
 
-            protected $_version = '2.1.5';
+            protected $_version = '2.1.6';
             public $_optionName = 'devvn_woo_district';
             public $_optionGroup = 'devvn-district-options-group';
             public $_defaultOptions = array(

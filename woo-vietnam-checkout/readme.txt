@@ -4,7 +4,7 @@ Donate link: https://levantoan.com/donate/
 Tags: woocommerce, woo viet, Vietnam Checkout for WooCommerce, quan huyen, vietnam checkout
 Requires at least: 4.3
 Tested up to: 6.8.2
-Stable tag: 2.1.5
+Stable tag: 2.1.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
